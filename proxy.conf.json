@@ -1,0 +1,8 @@
+{
+  "/api": {
+    "target": "https://gpa-calculator-api-17mp.vercel.app",
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}

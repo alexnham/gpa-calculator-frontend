@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="header">
+    <img src="western-crest.svg" alt="Western University Logo" class="logo" width="1000px"/>
+  </div>
+  <div>
+    <h1 class="title">GPA Calculator</h1>
+  </div>
+
+  <p class="description">
+    Upload your PDF transcript to calculate your average GPA. This tool is designed for Western University students.
+  </p>
+
+<div class="upload-section">
+  <label class="file-upload">
+    <input type="file" accept="application/pdf" (change)="onFileChange($event)" />
+    <span>{{ selectedFile ? selectedFile.name : 'Choose PDF transcript...' }}</span>
+  </label>
+
+  <button (click)="uploadFile()" [disabled]="uploading || !selectedFile">
+    {{ uploading ? 'Uploading...' : 'Upload Transcript' }}
+  </button>
+</div>
+
+
+  <div *ngIf="error" class="error-message">
+    {{ error }}
+  </div>
+
+  <div *ngIf="result" class="result-section">
+    <h2>GPA Result</h2>
+    <pre>{{ result | json }}</pre>
+  </div>
+</div>
