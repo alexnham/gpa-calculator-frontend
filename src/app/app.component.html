@@ -1,33 +1,38 @@
 <div class="container">
-  <div class="header">
-    <img src="western-crest.svg" alt="Western University Logo" class="logo" width="1000px"/>
-  </div>
-  <div>
-    <h1 class="title">GPA Calculator</h1>
-  </div>
+    <div class="header">
+        <img src="western-crest.svg" alt="Western University Logo" class="logo" width="1000px" />
+    </div>
+    <div>
+        <h1 class="title">GPA Calculator</h1>
+    </div>
 
-  <p class="description">
-    Upload your PDF transcript to calculate your average GPA. This tool is designed for Western University students.
-  </p>
+    <p class="description">
+        Upload your PDF transcript to calculate your average GPA. This tool is designed for Western University students. 
+    </p>
 
-<div class="upload-section">
-  <label class="file-upload">
-    <input type="file" accept="application/pdf" (change)="onFileChange($event)" />
-    <span>{{ selectedFile ? selectedFile.name : 'Choose PDF transcript...' }}</span>
-  </label>
+    <div class="upload-section" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)"
+        (drop)="onDrop($event)" [class.dragging]="isDragging">
+        <label class="file-upload">
+            <input type="file" accept="application/pdf" (change)="onFileChange($event)" />
+            <span>{{ selectedFile ? selectedFile.name : 'Select Transcript' }}</span>
+        </label>
+    </div>
 
-  <button (click)="uploadFile()" [disabled]="uploading || !selectedFile">
-    {{ uploading ? 'Uploading...' : 'Upload Transcript' }}
-  </button>
-</div>
+    <button (click)="uploadFile()" [disabled]="!selectedFile || uploading">
+        {{ uploading ? 'Uploading...' : 'Upload PDF' }}
+    </button>
 
 
-  <div *ngIf="error" class="error-message">
-    Invalid file. Please upload a valid PDF transcript.
-  </div>
+    <div *ngIf="error" class="error-message">
+        Invalid file. Please upload a valid PDF transcript.
+    </div>
 
-  <div *ngIf="result" class="result-section">
-    <h2>GPA Result</h2>
-    <pre>{{ result | json }}</pre>
-  </div>
+    <div *ngIf="result" class="result-section">
+        <h2>GPA Result</h2>
+        <pre>{{ result | json }}</pre>
+    </div>
+
+    <div>
+        <p class="footer">Transcripts not stored</p>
+    </div>
 </div>

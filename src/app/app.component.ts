@@ -19,6 +19,7 @@ export class AppComponent {
   result: any = null;
   uploading = false;
   error: string | null = null;
+  isDragging = false; // New: track drag state
 
   constructor(private http: HttpClient, private zone: NgZone) {}
 
@@ -40,6 +41,33 @@ export class AppComponent {
     }
 
     this.selectedFile = file;
+  }
+
+  // Drag-and-drop handlers
+  onDragOver(event: DragEvent) {
+    event.preventDefault();
+    this.isDragging = true;
+  }
+
+  onDragLeave(event: DragEvent) {
+    event.preventDefault();
+    this.isDragging = false;
+  }
+
+  onDrop(event: DragEvent) {
+    event.preventDefault();
+    this.isDragging = false;
+
+    if (event.dataTransfer?.files.length) {
+      const file = event.dataTransfer.files[0];
+      if (file.type !== 'application/pdf') {
+        this.error = 'Only PDF files are allowed!';
+        return;
+      }
+      this.selectedFile = file;
+      this.error = null;
+      this.result = null;
+    }
   }
 
   async uploadFile() {

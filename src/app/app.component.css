@@ -131,3 +131,40 @@ pre {
   line-height: 1.5;
   margin: 0;
 }
+.upload-section {
+  border: 2px dashed #ccc;
+  padding: 20px;
+  text-align: center;
+  transition: border-color 0.2s, background-color 0.2s;
+  margin-bottom: 10px;
+}
+
+.upload-section.dragging {
+  border-color: #2ecc71;
+  background-color: #f0fff0;
+  cursor: pointer;
+}
+
+.file-upload input {
+  display: none;
+}
+
+button {
+  padding: 10px 20px;
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
+}
+
+.result {
+  margin-top: 10px;
+  white-space: pre-wrap;
+}
+
+.footer {
+  font-size: 0.85rem;
+  color: #888;
+  margin-top: 200px;
+}
